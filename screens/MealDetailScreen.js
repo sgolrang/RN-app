@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, Button} from 'react-native';
+import {Text, View, StyleSheet, Button, ScrollView} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 // How to add text input and show them on the screen:
@@ -23,7 +23,7 @@ const mealDetailScreen = () => {
         setMealGoals(currentState => [...currentState, enteredGoal]);
     }
 return (
-    <View >
+    <View>
         <Text style={styles.headline}>Meal Detail Screen</Text>
         <Text >Meal Detail Screen</Text>
         {/* A placeholder to show a place for the user to entre text there */}
@@ -37,21 +37,38 @@ return (
 
         {/* once the Add is pressed, the function addGoalHandler will add the text */}
         <Button title= "ADD" onPress={addGoalHandler}/>
-        <View>
+
+         {/* to make the user able to scroll the page we use ScrollView: */}
+        <ScrollView >
+
             {/* to show the text on the screen: the map method which takes a fucntion and execute on every item in the array: */}
-            {mealGoals.map((goal)=> <Text>{goal}</Text>)}
-        </View>
+            {mealGoals.map((goal)=>  ( 
+            <View key={goal} style={styles.ListItem}>
+                <Text >{goal}
+                </Text>
+                </View>
+                ))}
+        </ScrollView>
     </View>
-)
+);
 };
 const styles = StyleSheet.create({
     headline: {
         flex:1,
-        textAlign: 'center',
+     textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 26,
-        marginTop: 400,
+        marginTop: 50,
         width: 400,
+    },
+    ListItem: {
+        // space between the border and the content
+        padding: 10,
+        // maring is the space between the border and the surrounding contents
+        margin: 10,
+        backgroundColor: '#ccc',
+        borderColor: 'black',
+        borderWidth: 1
     }
 })
 export default mealDetailScreen;
