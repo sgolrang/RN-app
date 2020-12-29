@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, Button, ScrollView} from 'react-native';
+import {Text, View, StyleSheet, Button, ScrollView, FlatList} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 // How to add text input and show them on the screen:
@@ -20,7 +20,10 @@ const mealDetailScreen = () => {
         // to update what we laready have, we either use setMealsGoals([..., ]) which is a javascript feature which takes an 
         // existing array and pulls out all the elements from that array and adds them to the new array but it is not %100 sure, 
         // so, we use this: it take two agruments what we have, and the user input:
-        setMealGoals(currentState => [...currentState, enteredGoal]);
+        setMealGoals(currentState => [...currentState,
+            // In order to solve the VirtualizedList warning which is related to FlatList, we random key and then we convert
+            // it to a string:
+            {key: Math.random().toString(), value: enteredGoal}])
     }
 return (
     <View>
@@ -38,17 +41,31 @@ return (
         {/* once the Add is pressed, the function addGoalHandler will add the text */}
         <Button title= "ADD" onPress={addGoalHandler}/>
 
-         {/* to make the user able to scroll the page we use ScrollView: */}
-        <ScrollView >
-
-            {/* to show the text on the screen: the map method which takes a fucntion and execute on every item in the array: */}
-            {mealGoals.map((goal)=>  ( 
+         {/* to make the user able to scroll the page we use ScrollView. we cannot use ScrollView if we don't know how long 
+         the list will be or it's a very long list -> FlatList*/}
+        {/* <ScrollView > */}
+          {/* to show the text on the screen: the map method which takes a fucntion and execute on every item in the array: */}
+        {/* {mealGoals.map((goal)=>  ( 
             <View key={goal} style={styles.ListItem}>
                 <Text >{goal}
                 </Text>
                 </View>
-                ))}
-        </ScrollView>
+                ))} */}
+                  {/* </ScrollView> */}
+
+                  {/* Flatlist has 2 properties: data and renderItem */}
+        <FlatList data={mealGoals}
+        // we can another property: Key Extractor
+        keyExtractor={(item, index) => item.key}
+        //    to show the text on the screen: 
+        renderItem={itemData => (
+        <View style={styles.ListItem}>
+                <Text >{itemData.item.value}</Text>
+                </View>
+        )}>
+           
+        </FlatList>
+      
     </View>
 );
 };
