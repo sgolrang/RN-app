@@ -14,6 +14,7 @@ return (
 
 const CategoriesScreen = props => {
     return (
+        //  to output a grid of categories, we need to use flatlist, and render data from dummy data
        <FlatList
     //  it gets item and index and needs to return the value that should be used as a key but not essential in new versions of React native  
        keyExtractor={(item, index)=> item.id}
