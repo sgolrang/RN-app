@@ -18,16 +18,21 @@ const mealDetailScreen = props => {
     }
     // A handler to show the user input on the screen as an array
     const addGoalHandler = () => {
+
         // to update what we laready have, we either use setMealsGoals([..., ]) which is a javascript feature which takes an 
         // existing array and pulls out all the elements from that array and adds them to the new array but it is not %100 sure, 
         // so, we use this: it take two agruments what we have, and the user input:
         setMealGoals(currentState => [...currentState,
         // In order to solve the VirtualizedList warning which is related to FlatList, we random key and then we convert
         // it to a string:
+
         { key: Math.random().toString(), value: enteredGoal }])
     }
-    const onDelete = () => {
-        console.log("Does this work?")
+
+    const removeGoalHandler = (goalKey) => {
+        setMealGoals(currentState => {
+            return currentState.filter((goal) => goal.id !== goalKey)
+        })
     }
     return (
         <View>
@@ -68,7 +73,9 @@ const mealDetailScreen = props => {
                     // How to use touchable opacity, it gives us a visual feedback about our touch by changing the opacity
                     // of the element we touched
                     // to control the opacity, we canadd activeOpacity prop on touchable
-                    <TouchableOpacity activeOpacity={0.8} onPress={onDelete} >
+                    <TouchableOpacity
+                        id={itemData.item.key}
+                        onPress={removeGoalHandler.bind()} >
                         <View style={styles.ListItem}>
                             <Text >{itemData.item.value}</Text>
                         </View>
