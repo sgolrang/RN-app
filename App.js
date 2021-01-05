@@ -8,9 +8,11 @@ import {
   Button,
   TextInput
 } from 'react-native';
-import { version } from 'react/cjs/react.production.min';
+// import { enableScreens} from 'react-native-screens';
 import MealsNavigator from './navigation/MealsNavigator';
-import CategoryMealScreen from './screens/CategoriesMealScreen';
+
+// enableScreens();
+
 const App = () => {
 
   return (

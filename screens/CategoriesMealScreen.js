@@ -25,22 +25,21 @@ const CategoriesMealScreen = props => {
         </View>
     )
 };
-// To set the navigation header, option #2: "Setting Dynamic Navigation Options": why to use dynamic? because here 
-// selectedCategory is inside the function and navigation happens after the function definition, so in order to set 
-// dynamically, we pass "naviationData"
+
+/*  To set the navigation header, option #2: "Setting Dynamic Navigation Options": why to use dynamic? because here 
+ selectedCategory is inside the function and navigation happens after the function definition, so in order to set 
+ dynamically, we pass "naviationData" */
 CategoriesMealScreen.navigationOptions = (navigationData) => {
-    // Then, to have access to the data that is previously used in the function, categoryId and selectedCategory, again
-    // we define them.
+    
+   /*  // Then, to have access to the data that is previously used in the function, categoryId and selectedCategory, again
+    // we define them. */
 const catId = navigationData.navigation.getParam('categoryId');
 const selectedCategory = CATEGORIES.find( cat=> cat.id === catId );
-// 
+
 return {
-    // This is how we can dynamically derive the header
-    headerTitle: selectedCategory.title,
-    headerStyle: {
-        backgroundColor: Colors.primaryColor
-    },
-    headerTintColor: 'white'
+    // This is how we can dynamically derive the header:
+    headerTitle: selectedCategory.title
+  
 }
 }
 

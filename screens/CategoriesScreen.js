@@ -45,10 +45,6 @@ const CategoriesScreen = props => {
 // to set a Header Title, option #1 add a propperty:
 CategoriesScreen.navigationOptions = {
     headerTitle: 'Meal Categories',
-    headerStyle: {
-        backgroundColor: Colors.primaryColor
-    },
-    headerTintColor: 'white'
 }
 
 
