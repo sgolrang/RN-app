@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, Button, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { CATEGORIES } from '../data/dummy-data';
-import Colors from '../constants/Colors';
 import CategoryGridTile from '../components/CategooryGridTile';
 
 const CategoriesScreen = props => {
@@ -10,8 +9,11 @@ const CategoriesScreen = props => {
     const renderGridItem = (itemData) => {
         return (
             <CategoryGridTile title={itemData.item.title} 
+             /* to make the color visible from the dummy-data that we had which had a color property, in the category.js
+             we name the propoerty color so we use it here:  */
             color= {itemData.item.color}
             onSelect={() => {
+                // 
                 props.navigation.navigate({
                     routeName: 'CategoryMeals',
                     params: {

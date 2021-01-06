@@ -4,6 +4,7 @@ import { StyleSheet, TouchableOpacity, View, Text, TouchableNativeFeedback, Plat
 
 const CategoryGridTile = props => {
     let TouchableCmp = TouchableOpacity;
+    
     if (Platform.OS === 'android' && Platform.Version >= 21) {
         TouchableCmp = TouchableNativeFeedback;
     }
@@ -12,8 +13,13 @@ const CategoryGridTile = props => {
             <TouchableCmp
                 style={{flex:1}}
                 onPress={props.onSelect}>
-                <View style={{ ...styles.container, ...{ backgroundColor: props.color } }} >
-                    <Text style={styles.title} numberOfLines={2}>{props.title}</Text>
+                <View style={{ ...styles.container,
+                /* In here we want that the background color comes from the color property that we had: */
+                    ...{ backgroundColor: props.color } }} >
+                    <Text style={styles.title} 
+
+                    /* To ensure that no line would be longer than 2, or it gets cutt of: */
+                    numberOfLines={2}>{props.title}</Text>
                 </View>
             </TouchableCmp>
 
@@ -30,6 +36,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden'
     },
     container: {
+        /* To make sure that every item fills all the space it gets: flex */
         flex: 1,
         borderRadius: 10,
         shadowColor: 'black',
