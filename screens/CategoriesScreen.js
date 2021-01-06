@@ -2,33 +2,45 @@ import React from 'react';
 import { Text, View, Button, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { CATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';
-
+import CategoryGridTile from '../components/CategooryGridTile';
 
 const CategoriesScreen = props => {
 
     // a function that will recieve some data in the end here and that should return a jsx element
     const renderGridItem = (itemData) => {
         return (
-            <TouchableOpacity
-                style={styles.gridItem}
-                onPress={() => {
-                props.navigation.navigate({ routeName: 'CategoryMeals',
-                // another object to be passed to the navigator, and this takes an object of key-value, any key-value 
-                // pairs and as many as you want. This is simply parameters, or extra data that is passing to the new screen
-                params: {
-                    // the id of the category we tapped on, we are getting our item data in renderGridItem,
-                     categoryId: 
-                    //  now we are forwarding that Id to thh ne screen which is being loaded and this allows us to thn use
-                    // that data in that new screen --> CategoryMealScreen
-                     itemData.item.id
-                }
+            <CategoryGridTile title={itemData.item.title} 
+            color= {itemData.item.color}
+            onSelect={() => {
+                props.navigation.navigate({
+                    routeName: 'CategoryMeals',
+                    params: {
+                        categoryId: itemData.item.id
+                    }
                 })
-                }}>
-                <View >
-                    {/* the item data object here has an item propperty */}
-                    <Text>{itemData.item.title}</Text>
-                </View>
-            </TouchableOpacity>
+            }} />
+
+            /* All these moved to the CategoryGridTile */
+            // <TouchableOpacity
+            //     style={styles.gridItem}
+            //     onPress={() => {
+            //     props.navigation.navigate({ routeName: 'CategoryMeals',
+            //     // another object to be passed to the navigator, and this takes an object of key-value, any key-value 
+            //     // pairs and as many as you want. This is simply parameters, or extra data that is passing to the new screen
+            //     params: {
+            //         // the id of the category we tapped on, we are getting our item data in renderGridItem,
+            //          categoryId: 
+            //         //  now we are forwarding that Id to thh ne screen which is being loaded and this allows us to thn use
+            //         // that data in that new screen --> CategoryMealScreen
+            //          itemData.item.id
+            //     }
+            //     })
+            //     }}>
+            //     <View >
+            //         {/* the item data object here has an item propperty */}
+            //         <Text>{itemData.item.title}</Text>
+            //     </View>
+            // </TouchableOpacity>
 
         )
     }
@@ -56,11 +68,7 @@ const styles = StyleSheet.create({
         marginTop: 250,
         width: 400,
     },
-    gridItem: {
-        flex: 1,
-        margin: 15,
-        height: 150
-    }
+
 })
 
 export default CategoriesScreen;
