@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList, ShadowPropTypesIOS } from 'react-native';
+import { Text, View, StyleSheet, FlatList } from 'react-native';
 import {CATEGORIES, MEALS} from '../data/dummy-data';
-import Colors from '../constants/Colors';
-import { TextInput } from 'react-native-gesture-handler';
+
+import MealItem from '../components/MealItem';
 
 const CategoriesMealScreen = props => {
    /*   to access a param we defined in categoriesScreen.js, we have getParams: a method provided 
@@ -17,10 +17,15 @@ const CategoriesMealScreen = props => {
     //  const selectedCategory = CATEGORIES.find(cat=> cat.id === catId );
 
     const renderMealItem = itemData => {
-        return (
-            <View>
-                <Text>{itemData.item.title}</Text>
-            </View>
+        return ( 
+        <MealItem title={itemData.item.title}
+        image={itemData.item.imageUrl}
+        duration={itemData.item.duration}
+        complexity={itemData.item.complexity}
+        affordability={itemData.item.affordability}
+        onSelectMeal= {()=> {}}
+        />
+          
         )
     }
 
@@ -35,6 +40,7 @@ const CategoriesMealScreen = props => {
             /* Modern version of react native does not need the keyExtractor, it does it automatically but just in case: */ 
             keyExtractor={(item, index) => item.id}
             renderItem= {renderMealItem}
+            style={{width: '100%'}}
             />
            
     
